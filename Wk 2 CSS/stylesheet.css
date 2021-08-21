@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #956226;
+    font-family: 'Aleo', sans-serif;
+    font-size: 20px;
+}
+
+.header {
+    padding: 30px;
+    background-color: #0d100e;
+}
+
+.header h1 {
+    font-family: 'Aleo';
+    font-size: 50px;
+    color: #b8a081;
+}
+
+.header nav {
+    float: right;
+    font-family: 'Aleo';
+    font-size: large;
+    background-color: #0d100e;
+}
+
+.header nav ul {
+    list-style-type: none;
+}
+
+.header nav ul li {
+    display: inline-block;
+    margin-left: 25px;
+}
+
+a:link {
+    color: #b8a081;
+}
+
+a:visited {
+    color: white;
+}
+
+.about-me {
+    display: inline-block;
+    background-color: #b8a081;
+    padding: 20px;
+    margin: 20px;
+}
+
+.about-me h2 {
+    font-size: 40px;
+    float: center;
+    padding: 15px;
+}
+
+.about-me img{
+    float: left;
+    width: 20%;
+    border: 5px ridge white;
+    box-shadow: 0px 0px 10px white;
+}
+
+.about-me-text p {
+    margin-left: 22%;
+}
+
+p {
+    font-size: 30px;
+}
+
+/*work section formatting*/
+.work {
+    background-color: #b8a081;
+    padding: 20px;
+    margin: 20px;
+}
+
+.work h3 {
+    font-size: 40px;
+    float: center;
+    padding: 15px;
+}
+
+/*beginning of card formatting*/
+.container {
+    /*top right bottom left*/
+    margin-left: 5px;
+    margin-bottom: 20px;
+}
+
+.row {
+    width: 100%;
+    display: grid;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.horiseon-container {
+    margin: 20px;
+   
+}
+
+.horiseon {
+    display: block;
+    margin: auto;
+    position: relative;
+    background-size: cover;
+}
+
+.more-work {
+    display: flex;
+}
+
+.container-img {
+    flex: 33.3%;
+    padding: 20px;
+}
+
+.more-work img {
+    width: 33%;
+    height: 100%;
+}
+
+.image .details h4, h5, h6 {
+    text-align: center;
+    background-color: tan;
+    font-size: 35px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-top: 70px;
+    transition: 0.4s;
+    transition-property: transform;
+}
+
+.image:hover .details h4, h5, h6 {
+    transform: translateY(-30px);
+}
+
+.image .details p{
+    margin: 30px 30px 0 30px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transition: 0.6s;
+    transition-property: opacity, transform;
+}
+
+.image:hover .details p{
+    opacity: 1;
+    transform: translateY(-40px);
+}
+
+.more {
+    position: absolute;
+    background: tan;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    bottom: -60px;
+    transition: 0.6s;
+    transition-property: bottom;
+}
+
+.image:hover .more {
+    bottom: 0;
+}
+
+.more .read-more {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* responsive CSS */
+@media (max-width: 1080px) {
+    .image {
+        grid: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .image .details p {
+        font-size: 16px;
+    }
+
+    .more .read-more, .more a {
+        font-size: 18px;
+    }
+}
+
+.resume {
+    display: inline-block;
+    background-color: #b8a081;
+    padding: 30px;
+    margin: 30px;
+}
+
+.resume .h7 {
+    font-size: 40px;
+    text-align: center;
+    padding: 15px;
+}
+
+.resume img {
+    float: left;
+}
+
+.contact {
+    display: inline-block;
+    background-color: #b8a081;
+    padding: 20px;
+    margin: 20px;
+}
+
+.contact .h8 {
+    font-size: 40px;
+    float: center;
+    padding: 15px;
+}
+
+.contact a {
+    color: red;
+    background-color: white;
+}
