@@ -13,6 +13,12 @@ const db = mysql.createConnection(
   console.log(`Connected to the company_db database.`)
 );
 
+// db.connect(function (err) {
+//   if (err) throw err;
+//   console.log("connected as id " + connection.threadId + "\n");
+//   promptUser();
+// });
+
 function promptUser() {
   inquirer.prompt([{
     type: 'list',
@@ -120,32 +126,38 @@ function addRole() {
 }
 
 function addEmployee() {
-  inquirer.prompt([{
-    type: 'list',
-    message: 'Select from the options below:',
-    name: 'addEmployee',
-    choices: [
-      'First name',
-      'Last name',
-      'Role id',
-      'Manager id',
-    ]
-
-  }]).then(answers => {
-    switch (answers.addEmployee) {
-      case 'First name':
-        firstName()
-        break;
-      case 'Last name':
-        lastName()
-        break;
-      case 'Role id':
-        roleId()
-        break;
-      case 'Manager id':
-        managerId()
-        break;
-    }
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter first name:',
+      name: 'firstName'
+    },
+    {
+      type: 'input',
+      message: 'Enter last name:',
+      name: 'lastName'
+    },
+    {
+      type: 'input',
+      message: 'Enter role id (1,2):',
+      name: 'roleId'
+    },
+    {
+      type: 'input',
+      message: 'Enter manager id (1,2):',
+      name: 'managerId'
+    },
+    {
+      type: 'input',
+      message: 'Enter department id (1-5):',
+      name: 'departmentId'
+    },
+  ]).then(function (res) {
+    db.query('INSERT INTO employees (first_name, last_name, role_id, manager_id, department_id) VALUES (?, ?, ?, ?, ?)', [res.firstName, res.lastName, res.roleId, res.managerId, res.departmentId], function (err, data) {
+      if (err) throw err;
+      console.table("Successfully added");
+      promptUser();
+    })
   });
 
 }
