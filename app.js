@@ -74,6 +74,7 @@ function viewEmployees() {
   });
 
 }
+
 function viewDepartments() {
   const sql = `SELECT * FROM departments`;
 
@@ -84,6 +85,7 @@ function viewDepartments() {
   });
 
 }
+
 function viewRoles() {
   const sql = `SELECT * FROM roles`;
 
@@ -94,6 +96,7 @@ function viewRoles() {
   });
 
 }
+
 function addDepartment() {
   const sql = `ALTER table employees ADD department_id INT`;
 
@@ -104,6 +107,7 @@ function addDepartment() {
   });
 
 }
+
 function addRole() {
   const sql = `ALTER table employees ADD role_id INT`;
 
@@ -114,18 +118,40 @@ function addRole() {
   });
 
 }
-function addEmployee() {
-  const sql = `ALTER table employees ADD role_id INT`;
 
-  db.query(sql, (err, result) => {
-    if (err) throw err
-    console.table(result)
-    promptUser()
+function addEmployee() {
+  inquirer.prompt([{
+    type: 'list',
+    message: 'Select from the options below:',
+    name: 'addEmployee',
+    choices: [
+      'First name',
+      'Last name',
+      'Role id',
+      'Manager id',
+    ]
+
+  }]).then(answers => {
+    switch (answers.addEmployee) {
+      case 'First name':
+        firstName()
+        break;
+      case 'Last name':
+        lastName()
+        break;
+      case 'Role id':
+        roleId()
+        break;
+      case 'Manager id':
+        managerId()
+        break;
+    }
   });
 
 }
+
 function updateEmployeeRole() {
-  const sql = `UPDATE employees SET manager_id = 1 WHERE manager_id = 2`;
+  const sql = `ALTER table employees ADD role_id INT`;
 
   db.query(sql, (err, result) => {
     if (err) throw err
