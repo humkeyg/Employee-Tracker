@@ -10,14 +10,16 @@ const db = mysql.createConnection(
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
   },
-  console.log(`Connected to the company_db database.`)
 );
 
-// db.connect(function (err) {
-//   if (err) throw err;
-//   console.log("connected as id " + connection.threadId + "\n");
-//   promptUser();
-// });
+// module.exports = db;
+
+db.connect(function (err) {
+  if (err) throw err;
+  console.log("connected as id " + db.threadId + "\n");
+  console.log(`Connected to the company_db database.`)
+  promptUser();
+});
 
 function promptUser() {
   inquirer.prompt([{
@@ -173,4 +175,4 @@ function updateEmployeeRole() {
 
 }
 
-promptUser()
+// promptUser()
