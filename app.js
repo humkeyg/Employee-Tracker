@@ -188,29 +188,29 @@ function addEmployee() {
 
 }
 
-function updateEmployeeRole() {
-  const sql = `ALTER table employees ADD role_id INT`;
+// function updateEmployeeRole() {
+//   const sql = `ALTER table employees ADD role_id INT`;
 
-  db.query(sql, (err, result) => {
-    if (err) throw err
-    console.table(result)
-    promptUser()
-  });
+//   db.query(sql, (err, result) => {
+//     if (err) throw err
+//     console.table(result)
+//     promptUser()
+//   });
 
-}
+// }
 
-function deleteFrom() {
-  inquirer.prompt([
-    {
-      type: 'input',
-      message: 'Enter department name:',
-      name: 'departmentName'
-    },
-  ]).then(function (res) {
-    db.query('DELETE FROM departments [WHERE name] VALUES (?)', [res.departmentName], function (err, data) {
-      if (err) throw err;
-      console.table("Successfully deleted");
-      promptUser();
-    })
-  });
-}
+// function deleteFrom() {
+//   inquirer.prompt([
+//     {
+//       type: 'input',
+//       message: 'Enter department name:',
+//       name: 'departmentName'
+//     },
+//   ]).then(function (res) {
+//     db.query('DELETE FROM departments [WHERE name] VALUES (?)', [res.departmentName], function (err, data) {
+//       if (err) throw err;
+//       console.table("Successfully deleted");
+//       promptUser();
+//     })
+//   });
+// }
