@@ -1,6 +1,6 @@
+const inquirer = require("inquirer");
 const mysql = require('mysql2');
-const inquirer = require('inquirer');
-const consoleTable = require('console.table');
+
 require('dotenv').config();
 
 const db = mysql.createConnection(
@@ -12,11 +12,8 @@ const db = mysql.createConnection(
   },
 );
 
-// module.exports = db;
-
 db.connect(function (err) {
   if (err) throw err;
-  console.log("connected as id " + db.threadId + "\n");
   console.log(`Connected to the company_db database.`)
   promptUser();
 });
@@ -34,6 +31,7 @@ function promptUser() {
       'Add role',
       'Add employee',
       'Update employee role',
+      'Delete departments, roles, or employees'
 
     ]
   }]).then(answers => {
@@ -64,6 +62,10 @@ function promptUser() {
 
       case 'Update employee role':
         updateEmployeeRole()
+        break;
+
+      case 'Delete departments, roles, or employees':
+        deleteFrom()
         break;
 
       default:
@@ -106,23 +108,45 @@ function viewRoles() {
 }
 
 function addDepartment() {
-  const sql = `ALTER table employees ADD department_id INT`;
-
-  db.query(sql, (err, result) => {
-    if (err) throw err
-    console.table(result)
-    promptUser()
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter department name:',
+      name: 'name'
+    },
+  ]).then(function (res) {
+    db.query('INSERT INTO departments (name) VALUES (?)', [res.name], function (err, data) {
+      if (err) throw err;
+      console.table("Successfully added");
+      promptUser();
+    })
   });
 
 }
 
 function addRole() {
-  const sql = `ALTER table employees ADD role_id INT`;
-
-  db.query(sql, (err, result) => {
-    if (err) throw err
-    console.table(result)
-    promptUser()
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter role title:',
+      name: 'title'
+    },
+    {
+      type: 'input',
+      message: 'Enter salary:',
+      name: 'salary'
+    },
+    {
+      type: 'input',
+      message: 'Enter department id (1-5):',
+      name: 'departmentId'
+    },
+  ]).then(function (res) {
+    db.query('INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)', [res.title, res.salary, res.departmentId], function (err, data) {
+      if (err) throw err;
+      console.table("Successfully added");
+      promptUser();
+    })
   });
 
 }
@@ -175,4 +199,18 @@ function updateEmployeeRole() {
 
 }
 
-// promptUser()
+function deleteFrom() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'Enter department name:',
+      name: 'departmentName'
+    },
+  ]).then(function (res) {
+    db.query('DELETE FROM departments [WHERE name] VALUES (?)', [res.departmentName], function (err, data) {
+      if (err) throw err;
+      console.table("Successfully deleted");
+      promptUser();
+    })
+  });
+}
